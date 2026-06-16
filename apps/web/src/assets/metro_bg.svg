@@ -1,0 +1,171 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definitions for gradients and glowing filters -->
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="skyGrad" cx="50%" cy="40%" r="60%" fx="50%" fy="40%">
+      <stop offset="0%" stop-color="#140b24" stop-opacity="1" />
+      <stop offset="60%" stop-color="#07060f" stop-opacity="1" />
+      <stop offset="100%" stop-color="#030308" stop-opacity="1" />
+    </radialGradient>
+
+    <!-- Neon Sun / Horizon Glow -->
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff007f" stop-opacity="0.25" />
+      <stop offset="40%" stop-color="#ff007f" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#ff007f" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Skyscraper neon gradients -->
+    <linearGradient id="cyanSkyscraper" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#05050c" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="magentaSkyscraper" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff007f" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#05050c" stop-opacity="0" />
+    </linearGradient>
+    
+    <!-- Neon strokes -->
+    <linearGradient id="strokeCyan" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.8" />
+      <stop offset="70%" stop-color="#00f0ff" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#00f0ff" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="strokeMagenta" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff007f" stop-opacity="0.7" />
+      <stop offset="70%" stop-color="#ff007f" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#ff007f" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="40" result="blur" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1920" height="1080" fill="url(#skyGrad)" />
+
+  <!-- Giant Synthwave Sun / Core Glow -->
+  <circle cx="960" cy="540" r="450" fill="url(#sunGlow)" filter="url(#softGlow)" />
+  <!-- Sun outlines -->
+  <path d="M 660 540 A 300 300 0 0 1 1260 540" stroke="#ff007f" stroke-width="1.5" stroke-opacity="0.2" fill="none" filter="url(#neonGlow)" />
+  <line x1="610" y1="560" x2="1310" y2="560" stroke="#ff007f" stroke-width="1" stroke-opacity="0.1" />
+  <line x1="630" y1="580" x2="1290" y2="580" stroke="#ff007f" stroke-width="1" stroke-opacity="0.1" />
+
+  <!-- Perspective Grid lines (Horizon at y=540) -->
+  <g opacity="0.35">
+    <!-- Horizon Line -->
+    <line x1="0" y1="540" x2="1920" y2="540" stroke="#00f0ff" stroke-width="1.5" stroke-opacity="0.4" filter="url(#neonGlow)" />
+    
+    <!-- Vanishing Lines from horizon center -->
+    <line x1="960" y1="540" x2="-200" y2="1080" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="960" y1="540" x2="100" y2="1080" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="960" y1="540" x2="400" y2="1080" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.4" />
+    <line x1="960" y1="540" x2="700" y2="1080" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.4" />
+    <line x1="960" y1="540" x2="960" y2="1080" stroke="#00f0ff" stroke-width="1.5" stroke-opacity="0.5" filter="url(#neonGlow)" />
+    <line x1="960" y1="540" x2="1220" y2="1080" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.4" />
+    <line x1="960" y1="540" x2="1520" y2="1080" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.4" />
+    <line x1="960" y1="540" x2="1820" y2="1080" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="960" y1="540" x2="2120" y2="1080" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.3" />
+    
+    <!-- Horizontal lines with perspective scaling -->
+    <line x1="0" y1="555" x2="1920" y2="555" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.15" />
+    <line x1="0" y1="575" x2="1920" y2="575" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.18" />
+    <line x1="0" y1="605" x2="1920" y2="605" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.22" />
+    <line x1="0" y1="645" x2="1920" y2="645" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.26" />
+    <line x1="0" y1="700" x2="1920" y2="700" stroke="#00f0ff" stroke-width="1.2" stroke-opacity="0.32" />
+    <line x1="0" y1="775" x2="1920" y2="775" stroke="#00f0ff" stroke-width="1.2" stroke-opacity="0.4" />
+    <line x1="0" y1="875" x2="1920" y2="875" stroke="#00f0ff" stroke-width="1.5" stroke-opacity="0.5" filter="url(#neonGlow)" />
+    <line x1="0" y1="1005" x2="1920" y2="1005" stroke="#00f0ff" stroke-width="2.0" stroke-opacity="0.6" filter="url(#neonGlow)" />
+  </g>
+
+  <!-- Far Layer Skyline (Deep Purple / low opacity) -->
+  <g opacity="0.4">
+    <!-- Building 1 -->
+    <rect x="150" y="320" width="80" height="220" fill="url(#magentaSkyscraper)" stroke="url(#strokeMagenta)" stroke-width="1" />
+    <!-- Building 2 -->
+    <rect x="270" y="260" width="100" height="280" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="1" />
+    <path d="M 320 200 L 320 260" stroke="#00f0ff" stroke-width="1" />
+    <!-- Building 3 -->
+    <rect x="420" y="340" width="70" height="200" fill="url(#magentaSkyscraper)" stroke="url(#strokeMagenta)" stroke-width="1" />
+    <!-- Building 4 (Tower with pyramid top) -->
+    <path d="M 570 300 L 610 240 L 650 300 Z" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="1" />
+    <rect x="570" y="300" width="80" height="240" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="1" />
+    
+    <!-- Building 5 (Middle tall spire) -->
+    <rect x="880" y="180" width="50" height="360" fill="url(#magentaSkyscraper)" stroke="url(#strokeMagenta)" stroke-width="1" />
+    <line x1="905" y1="100" x2="905" y2="180" stroke="#ff007f" stroke-width="1.5" filter="url(#neonGlow)" />
+    
+    <!-- Building 6 -->
+    <rect x="1200" y="280" width="90" height="260" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="1" />
+    <!-- Building 7 -->
+    <rect x="1350" y="350" width="60" height="190" fill="url(#magentaSkyscraper)" stroke="url(#strokeMagenta)" stroke-width="1" />
+    <!-- Building 8 -->
+    <rect x="1480" y="220" width="110" height="320" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="1" />
+    <path d="M 1535 150 L 1535 220" stroke="#00f0ff" stroke-width="1" />
+  </g>
+
+  <!-- Mid Layer Skyline (More detail, cyan/magenta) -->
+  <g opacity="0.65">
+    <!-- Building A (Left blocky tower) -->
+    <rect x="50" y="250" width="120" height="290" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="1.5" />
+    <!-- Antennas & Windows -->
+    <line x1="110" y1="200" x2="110" y2="250" stroke="#00f0ff" stroke-width="1.5" filter="url(#neonGlow)" />
+    <circle cx="110" cy="195" r="3" fill="#00f0ff" filter="url(#neonGlow)" />
+    
+    <!-- Building B (Tall stepped magenta tower) -->
+    <rect x="220" y="200" width="90" height="340" fill="url(#magentaSkyscraper)" stroke="url(#strokeMagenta)" stroke-width="1.5" />
+    <rect x="235" y="160" width="60" height="40" fill="url(#magentaSkyscraper)" stroke="url(#strokeMagenta)" stroke-width="1.5" />
+    <rect x="250" y="110" width="30" height="50" fill="url(#magentaSkyscraper)" stroke="url(#strokeMagenta)" stroke-width="1.5" />
+    <line x1="265" y1="50" x2="265" y2="110" stroke="#ff007f" stroke-width="1.5" filter="url(#neonGlow)" />
+    
+    <!-- Building C (Grid building) -->
+    <rect x="360" y="290" width="80" height="250" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="1.5" />
+    <!-- Internal grid pattern (subtle window lights) -->
+    <path d="M 380 320 H 420 M 380 350 H 420 M 380 380 H 420 M 380 410 H 420 M 380 440 H 420" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.3" />
+    
+    <!-- Building D (Angled roof) -->
+    <path d="M 720 220 L 820 160 L 820 540 L 720 540 Z" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="1.5" />
+    
+    <!-- Building E (Giant central monolith) -->
+    <rect x="990" y="120" width="140" height="420" fill="url(#magentaSkyscraper)" stroke="url(#strokeMagenta)" stroke-width="2" filter="url(#neonGlow)" />
+    <!-- Diagonal glowing slash on monolith -->
+    <line x1="1020" y1="160" x2="1100" y2="360" stroke="#ff007f" stroke-width="3" filter="url(#neonGlow)" />
+    <line x1="1040" y1="160" x2="1120" y2="360" stroke="#ff007f" stroke-width="1" stroke-opacity="0.8" />
+    
+    <!-- Building F (High tech tower) -->
+    <rect x="1190" y="230" width="80" height="310" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="1.5" />
+    <circle cx="1230" cy="270" r="15" fill="none" stroke="#00f0ff" stroke-width="1.5" stroke-opacity="0.6" />
+    <line x1="1230" y1="170" x2="1230" y2="230" stroke="#00f0ff" stroke-width="1.5" />
+    
+    <!-- Building G (Right block) -->
+    <rect x="1380" y="270" width="110" height="270" fill="url(#magentaSkyscraper)" stroke="url(#strokeMagenta)" stroke-width="1.5" />
+    
+    <!-- Building H (Rightmost tall tower) -->
+    <rect x="1650" y="180" width="130" height="360" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="2" />
+    <path d="M 1650 180 L 1715 100 L 1780 180 Z" fill="url(#cyanSkyscraper)" stroke="url(#strokeCyan)" stroke-width="2" />
+    <line x1="1715" y1="40" x2="1715" y2="100" stroke="#00f0ff" stroke-width="2" filter="url(#neonGlow)" />
+  </g>
+
+  <!-- Glowing particles/stars in sky -->
+  <g opacity="0.8">
+    <circle cx="200" cy="120" r="1.5" fill="#00f0ff" filter="url(#neonGlow)" />
+    <circle cx="450" cy="80" r="1" fill="#fff" />
+    <circle cx="800" cy="150" r="2" fill="#ff007f" filter="url(#neonGlow)" />
+    <circle cx="1150" cy="90" r="1" fill="#00f0ff" />
+    <circle cx="1400" cy="140" r="1.5" fill="#fff" />
+    <circle cx="1600" cy="70" r="2.5" fill="#ff007f" filter="url(#neonGlow)" />
+    <circle cx="1780" cy="130" r="1" fill="#00f0ff" />
+  </g>
+
+  <!-- Foremost detailed structures (Very subtle overlay shadows at bottom) -->
+  <rect x="0" y="520" width="1920" height="20" fill="#05050c" />
+</svg>

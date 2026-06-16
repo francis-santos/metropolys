@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Outfit:wght@400;650;900&display=swap');
+
+:root {
+  --neon-cyan: #00f0ff;
+  --neon-magenta: #ff007f;
+  --neon-green: #39ff14;
+  --neon-orange: #ff6c00;
+  --neon-red: #ff003c;
+  --neon-yellow: #fff200;
+  --cyber-bg: #05050c;
+  --cyber-bg-accent: #150a21;
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--cyber-bg);
+  color: #F8FAFC;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* Retro Scanlines Overlay */
+.retro-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.015),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 6px 100%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+/* Retro Cyber Grid Overlay */
+.retro-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Neon Text Glow utilities */
+.glow-text-cyan {
+  color: var(--neon-cyan) !important;
+  text-shadow: 0 0 5px rgba(0, 240, 255, 0.6), 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+.glow-text-magenta {
+  color: var(--neon-magenta) !important;
+  text-shadow: 0 0 5px rgba(255, 0, 127, 0.6), 0 0 15px rgba(255, 0, 127, 0.4);
+}
+
+.glow-text-green {
+  color: var(--neon-green) !important;
+  text-shadow: 0 0 5px rgba(57, 255, 20, 0.6), 0 0 15px rgba(57, 255, 20, 0.4);
+}
+
+.glow-text-orange {
+  color: var(--neon-orange) !important;
+  text-shadow: 0 0 5px rgba(255, 108, 0, 0.6), 0 0 15px rgba(255, 108, 0, 0.4);
+}
+
+/* Neon Borders */
+.neon-border-cyan {
+  border: 1px solid var(--neon-cyan) !important;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1) !important;
+}
+
+.neon-border-magenta {
+  border: 1px solid var(--neon-magenta) !important;
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.2), inset 0 0 10px rgba(255, 0, 127, 0.1) !important;
+}
+
+.neon-border-orange {
+  border: 1px solid var(--neon-orange) !important;
+  box-shadow: 0 0 10px rgba(255, 108, 0, 0.2), inset 0 0 10px rgba(255, 108, 0, 0.1) !important;
+}
+
+/* Hazard Stripes Decoration */
+.hazard-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--neon-yellow) 0px,
+    var(--neon-yellow) 6px,
+    #000000 6px,
+    #000000 12px
+  );
+  height: 4px;
+  width: 100%;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(8, 8, 20, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+  box-shadow: 0 0 5px var(--neon-cyan);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-magenta);
+  box-shadow: 0 0 5px var(--neon-magenta);
+}

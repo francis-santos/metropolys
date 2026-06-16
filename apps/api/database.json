@@ -1,0 +1,653 @@
+{
+  "rooms": [
+    {
+      "id": "room-xf97hfbj7",
+      "code": "AIUWWC",
+      "status": "PLAYING",
+      "cityCode": "salvador",
+      "currentRound": 1,
+      "bankingLiquidity": 10000,
+      "interestRate": 0.05,
+      "economicCycle": "EXPANSION",
+      "activeEventName": null,
+      "activeEventModifier": 1,
+      "winnerId": null,
+      "createdAt": "2026-06-14T22:54:37.828Z"
+    },
+    {
+      "id": "room-rrx2iylfk",
+      "code": "2ITY8W",
+      "status": "PLAYING",
+      "cityCode": "sao-paulo",
+      "currentRound": 2,
+      "bankingLiquidity": 10000,
+      "interestRate": 0.05,
+      "economicCycle": "EXPANSION",
+      "activeEventName": null,
+      "activeEventModifier": 1,
+      "winnerId": null,
+      "createdAt": "2026-06-14T22:54:41.687Z"
+    }
+  ],
+  "players": [
+    {
+      "id": "player-pd3t732c4",
+      "roomId": "room-xf97hfbj7",
+      "name": "Player1 (Host)",
+      "color": "#3B82F6",
+      "money": 1450,
+      "position": 0,
+      "isBankrupt": false,
+      "isHost": true,
+      "isBot": false,
+      "botPersonality": null,
+      "isOnline": true,
+      "pin": "pin-2"
+    },
+    {
+      "id": "player-ook5djnj4",
+      "roomId": "room-xf97hfbj7",
+      "name": "Player2",
+      "color": "#10B981",
+      "money": 1550,
+      "position": 0,
+      "isBankrupt": false,
+      "isHost": false,
+      "isBot": false,
+      "botPersonality": null,
+      "isOnline": false,
+      "pin": "pin-6"
+    },
+    {
+      "id": "player-q1q2xcem5",
+      "roomId": "room-xf97hfbj7",
+      "name": "Player3",
+      "color": "#F59E0B",
+      "money": 1391,
+      "position": 0,
+      "isBankrupt": false,
+      "isHost": false,
+      "isBot": false,
+      "botPersonality": null,
+      "isOnline": false,
+      "pin": "pin-1"
+    },
+    {
+      "id": "player-ufhqvk60s",
+      "roomId": "room-rrx2iylfk",
+      "name": "Host SP",
+      "color": "#10B981",
+      "money": 1500,
+      "position": 5,
+      "isBankrupt": false,
+      "isHost": true,
+      "isBot": false,
+      "botPersonality": null,
+      "isOnline": true,
+      "pin": "pin-7"
+    },
+    {
+      "id": "player-tgpvqge7a",
+      "roomId": "room-rrx2iylfk",
+      "name": "Bot Sampa 1",
+      "color": "#EF4444",
+      "money": 1300,
+      "position": 12,
+      "isBankrupt": false,
+      "isHost": false,
+      "isBot": true,
+      "botPersonality": "BALANCED",
+      "isOnline": true,
+      "pin": "pin-3"
+    },
+    {
+      "id": "player-qnl3nsfk4",
+      "roomId": "room-rrx2iylfk",
+      "name": "Bot Sampa 2",
+      "color": "#F59E0B",
+      "money": 1240,
+      "position": 8,
+      "isBankrupt": false,
+      "isHost": false,
+      "isBot": true,
+      "botPersonality": "CONSERVATIVE",
+      "isOnline": true,
+      "pin": "pin-8"
+    }
+  ],
+  "properties": [
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 0,
+      "ownerId": null,
+      "baseCost": 150,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 1,
+      "ownerId": "player-q1q2xcem5",
+      "baseCost": 120,
+      "currentRent": 12,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 2,
+      "ownerId": "player-ook5djnj4",
+      "baseCost": 140,
+      "currentRent": 14,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 3,
+      "ownerId": "player-pd3t732c4",
+      "baseCost": 160,
+      "currentRent": 16,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 4,
+      "ownerId": null,
+      "baseCost": 150,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 5,
+      "ownerId": null,
+      "baseCost": 200,
+      "currentRent": 20,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 6,
+      "ownerId": null,
+      "baseCost": 220,
+      "currentRent": 22,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 7,
+      "ownerId": null,
+      "baseCost": 150,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 8,
+      "ownerId": null,
+      "baseCost": 240,
+      "currentRent": 24,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 9,
+      "ownerId": null,
+      "baseCost": 260,
+      "currentRent": 26,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 10,
+      "ownerId": null,
+      "baseCost": 300,
+      "currentRent": 30,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 11,
+      "ownerId": null,
+      "baseCost": 320,
+      "currentRent": 32,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 12,
+      "ownerId": null,
+      "baseCost": 200,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 13,
+      "ownerId": null,
+      "baseCost": 350,
+      "currentRent": 35,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 14,
+      "ownerId": null,
+      "baseCost": 400,
+      "currentRent": 40,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 15,
+      "ownerId": null,
+      "baseCost": 70,
+      "currentRent": 7,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 16,
+      "ownerId": null,
+      "baseCost": 90,
+      "currentRent": 9,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 17,
+      "ownerId": null,
+      "baseCost": 150,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 18,
+      "ownerId": null,
+      "baseCost": 100,
+      "currentRent": 10,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-xf97hfbj7",
+      "slotId": 19,
+      "ownerId": null,
+      "baseCost": 110,
+      "currentRent": 11,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 0,
+      "ownerId": null,
+      "baseCost": 150,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 1,
+      "ownerId": null,
+      "baseCost": 130,
+      "currentRent": 13,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 2,
+      "ownerId": null,
+      "baseCost": 150,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 3,
+      "ownerId": null,
+      "baseCost": 180,
+      "currentRent": 18,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 4,
+      "ownerId": null,
+      "baseCost": 150,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 5,
+      "ownerId": null,
+      "baseCost": 220,
+      "currentRent": 22,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 6,
+      "ownerId": null,
+      "baseCost": 240,
+      "currentRent": 24,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 7,
+      "ownerId": null,
+      "baseCost": 150,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 8,
+      "ownerId": "player-qnl3nsfk4",
+      "baseCost": 260,
+      "currentRent": 26,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 9,
+      "ownerId": null,
+      "baseCost": 280,
+      "currentRent": 28,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 10,
+      "ownerId": null,
+      "baseCost": 320,
+      "currentRent": 32,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 11,
+      "ownerId": null,
+      "baseCost": 340,
+      "currentRent": 34,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 12,
+      "ownerId": null,
+      "baseCost": 200,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 13,
+      "ownerId": null,
+      "baseCost": 380,
+      "currentRent": 38,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 14,
+      "ownerId": null,
+      "baseCost": 420,
+      "currentRent": 42,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 15,
+      "ownerId": null,
+      "baseCost": 80,
+      "currentRent": 8,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 16,
+      "ownerId": null,
+      "baseCost": 100,
+      "currentRent": 10,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 17,
+      "ownerId": null,
+      "baseCost": 150,
+      "currentRent": 15,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 18,
+      "ownerId": null,
+      "baseCost": 110,
+      "currentRent": 11,
+      "multiplier": 1
+    },
+    {
+      "roomId": "room-rrx2iylfk",
+      "slotId": 19,
+      "ownerId": null,
+      "baseCost": 120,
+      "currentRent": 12,
+      "multiplier": 1
+    }
+  ],
+  "logs": [
+    {
+      "id": "log-qpzpk799x",
+      "roomId": "room-rrx2iylfk",
+      "text": "É o turno de Host SP!",
+      "color": "#10B981",
+      "createdAt": "2026-06-14T22:55:00.354Z"
+    },
+    {
+      "id": "log-peaehx8hk",
+      "roomId": "room-rrx2iylfk",
+      "text": "--- Rodada 2 Iniciada ---",
+      "color": "#94A3B8",
+      "createdAt": "2026-06-14T22:55:00.352Z"
+    },
+    {
+      "id": "log-1ffl6drhs",
+      "roomId": "room-rrx2iylfk",
+      "text": "Bot Sampa 2 comprou propriedade no Slot 8 por 260M!",
+      "color": "#F59E0B",
+      "createdAt": "2026-06-14T22:54:58.845Z"
+    },
+    {
+      "id": "log-pucdxkjse",
+      "roomId": "room-rrx2iylfk",
+      "text": "Bot Bot Sampa 2 decidiu: Compra segura. Meu saldo continuará confortável acima de 500M.",
+      "color": "#F59E0B",
+      "createdAt": "2026-06-14T22:54:58.825Z"
+    },
+    {
+      "id": "log-9yhj72z4a",
+      "roomId": "room-rrx2iylfk",
+      "text": "Bot Sampa 2 rolou os dados e tirou 8 (2 + 6).",
+      "color": "#F59E0B",
+      "createdAt": "2026-06-14T22:54:53.608Z"
+    },
+    {
+      "id": "log-tgaeomwb1",
+      "roomId": "room-rrx2iylfk",
+      "text": "É o turno de Bot Sampa 2!",
+      "color": "#F59E0B",
+      "createdAt": "2026-06-14T22:54:51.596Z"
+    },
+    {
+      "id": "log-d9evlk1ce",
+      "roomId": "room-rrx2iylfk",
+      "text": "Bot Sampa 1 foi taxado em 200M.",
+      "color": "#EF4444",
+      "createdAt": "2026-06-14T22:54:50.078Z"
+    },
+    {
+      "id": "log-7f92m1seb",
+      "roomId": "room-xf97hfbj7",
+      "text": "Leilão encerrado! Player3 arrematou a propriedade no Slot 1 por 109M!",
+      "color": "#F59E0B",
+      "createdAt": "2026-06-14T22:54:49.521Z"
+    },
+    {
+      "id": "log-0l2zo19ml",
+      "roomId": "room-rrx2iylfk",
+      "text": "Bot Sampa 1 rolou os dados e tirou 12 (6 + 6).",
+      "color": "#EF4444",
+      "createdAt": "2026-06-14T22:54:43.873Z"
+    },
+    {
+      "id": "log-kzsumtzva",
+      "roomId": "room-rrx2iylfk",
+      "text": "É o turno de Bot Sampa 1!",
+      "color": "#EF4444",
+      "createdAt": "2026-06-14T22:54:41.855Z"
+    },
+    {
+      "id": "log-o5ajz9fqd",
+      "roomId": "room-rrx2iylfk",
+      "text": "Host SP rolou os dados e tirou 5 (2 + 3).",
+      "color": "#10B981",
+      "createdAt": "2026-06-14T22:54:41.816Z"
+    },
+    {
+      "id": "log-oa5kv984f",
+      "roomId": "room-rrx2iylfk",
+      "text": "É o turno de Host SP!",
+      "color": "#10B981",
+      "createdAt": "2026-06-14T22:54:41.766Z"
+    },
+    {
+      "id": "log-aqisgwkc2",
+      "roomId": "room-rrx2iylfk",
+      "text": "A partida começou em SAO-PAULO!",
+      "color": "#38BDF8",
+      "createdAt": "2026-06-14T22:54:41.765Z"
+    },
+    {
+      "id": "log-kvmhmpdlz",
+      "roomId": "room-rrx2iylfk",
+      "text": "Bot Sampa 2 entrou no lobby!",
+      "color": "#F59E0B",
+      "createdAt": "2026-06-14T22:54:41.734Z"
+    },
+    {
+      "id": "log-b9ky7i8un",
+      "roomId": "room-rrx2iylfk",
+      "text": "Bot Sampa 1 entrou no lobby!",
+      "color": "#EF4444",
+      "createdAt": "2026-06-14T22:54:41.705Z"
+    },
+    {
+      "id": "log-cz7pody0o",
+      "roomId": "room-xf97hfbj7",
+      "text": "Acordo comercial selado! Troca efetuada entre Player1 (Host) e Player2.",
+      "color": "#10B981",
+      "createdAt": "2026-06-14T22:54:39.568Z"
+    },
+    {
+      "id": "log-v3z7khrac",
+      "roomId": "room-xf97hfbj7",
+      "text": "Player1 (Host) propôs uma negociação comercial para Player2!",
+      "color": "#EC4899",
+      "createdAt": "2026-06-14T22:54:39.537Z"
+    },
+    {
+      "id": "log-mmh5m5jq4",
+      "roomId": "room-xf97hfbj7",
+      "text": "Novo lance de 109M por Player3. Tempo estendido em 10s!",
+      "color": "#38BDF8",
+      "createdAt": "2026-06-14T22:54:39.513Z"
+    },
+    {
+      "id": "log-k4w4hv3k8",
+      "roomId": "room-xf97hfbj7",
+      "text": "Novo lance de 94M por Player2.",
+      "color": "#10B981",
+      "createdAt": "2026-06-14T22:54:39.492Z"
+    },
+    {
+      "id": "log-gabuimaks",
+      "roomId": "room-xf97hfbj7",
+      "text": "Leilão iniciado para a propriedade no Slot 1! Lance inicial: 84M.",
+      "color": "#3B82F6",
+      "createdAt": "2026-06-14T22:54:39.476Z"
+    },
+    {
+      "id": "log-dbafkf7sc",
+      "roomId": "room-xf97hfbj7",
+      "text": "É o turno de Player1 (Host)!",
+      "color": "#3B82F6",
+      "createdAt": "2026-06-14T22:54:39.444Z"
+    },
+    {
+      "id": "log-e4z46sy4v",
+      "roomId": "room-xf97hfbj7",
+      "text": "A partida começou em SALVADOR!",
+      "color": "#38BDF8",
+      "createdAt": "2026-06-14T22:54:39.426Z"
+    },
+    {
+      "id": "log-ute2bd0r7",
+      "roomId": "room-xf97hfbj7",
+      "text": "Player3 entrou no lobby!",
+      "color": "#F59E0B",
+      "createdAt": "2026-06-14T22:54:38.901Z"
+    },
+    {
+      "id": "log-j99624unh",
+      "roomId": "room-xf97hfbj7",
+      "text": "Player2 entrou no lobby!",
+      "color": "#10B981",
+      "createdAt": "2026-06-14T22:54:38.860Z"
+    }
+  ],
+  "auctions": [
+    {
+      "id": "auction-hi67zvh5c",
+      "roomId": "room-xf97hfbj7",
+      "slotId": 1,
+      "highestBid": 109,
+      "highestBidderId": "player-q1q2xcem5",
+      "endsAt": "2026-06-14T22:54:49.513Z",
+      "status": "FINISHED"
+    }
+  ],
+  "trades": [
+    {
+      "id": "trade-6h0gehtwz",
+      "roomId": "room-xf97hfbj7",
+      "senderId": "player-pd3t732c4",
+      "receiverId": "player-ook5djnj4",
+      "offerCash": 50,
+      "offerProperties": [
+        2
+      ],
+      "requestProperties": [
+        3
+      ],
+      "status": "ACCEPTED"
+    }
+  ],
+  "aiNews": [
+    {
+      "id": "news-z53looukd",
+      "roomId": "room-rrx2iylfk",
+      "headline": "Acontecimento em Foco",
+      "body": "Bot Sampa 2 adquiriu a propriedade no Slot 8 em SAO-PAULO por 260M.. Analistas locais monitoram as reações do mercado imobiliário nesta rodada.",
+      "createdAt": "2026-06-14T22:54:58.846Z"
+    },
+    {
+      "id": "news-o0sf7hdmg",
+      "roomId": "room-xf97hfbj7",
+      "headline": "Acontecimento em Foco",
+      "body": "Vendido! Player3 venceu o leilão e arrematou o Slot 1 por 109M!. Analistas locais monitoram as reações do mercado imobiliário nesta rodada.",
+      "createdAt": "2026-06-14T22:54:49.524Z"
+    }
+  ]
+}
