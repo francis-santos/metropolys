@@ -149,6 +149,18 @@ Abra o navegador no endereço indicado pelo Vite (normalmente [http://localhost:
 
 ---
 
+## 🤖 Ecossistema de Agentes de IA
+
+O projeto incorpora uma arquitetura de inteligência artificial voltada a testes, simulação e automação de desenvolvimento estruturada sob a pasta `.agent/`:
+
+*   **`board-agents/`**: O motor de simulação que roda a lógica de 20 agentes locais do tabuleiro em NodeJS. Funciona como um gêmeo digital para validar as regras do jogo.
+*   **`game-agents-cli`**: Skill da IA que mapeia o acesso ao motor de agentes a comandos de terminal (`npm run agent:*`).
+*   **`metropolys-squad`**: Skill consolidada com as diretrizes do time de desenvolvimento (Orquestrador, Arquiteto, DBA, Sênior Dev, UI/UX e QA) para guiar a IA de forma consistente respeitando o arquivo `.AGENTS.md`.
+
+Para mais detalhes sobre as interações e funcionamento, consulte a documentação dedicada em [.agent/README.md](file:///d:/Development/Projetos/Pessoais/Metropolys/.agent/README.md).
+
+---
+
 ## 🧪 Testes e Simulações
 
 O backend possui scripts de simulação de ponta a ponta (E2E) para validar a estabilidade das salas e os fluxos de turnos sob condições automatizadas.
