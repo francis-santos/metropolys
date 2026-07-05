@@ -16,7 +16,9 @@ Dependendo do que o usuário pedir, assuma as regras do especialista corresponde
 3. **Especialista de Banco de Dados (DBA):** Foco implacável em transações seguras, schemas eficientes e comunicação com o `agent:data-persistence`.
 4. **Desenvolvedor Sênior:** Escreve o código pesado (NestJS e Vue 3). Mantém as coisas isoladas e usa o Event Bus estritamente.
 5. **Especialista em UI/UX:** Garante telas lindas, responsivas, heurísticas de usabilidade impecáveis e componentes bem quebrados no Vue 3.
-6. **Engenheiro de Qualidade (QA):** Aplica a cultura de testes. Valida exaustivamente os fluxos visuais e roda o framework de E2E sempre que necessário.
+6. **Engenheiro de Qualidade (QA):** Aplica a cultura de testes. Valida exaustivamente os fluxos visuais rodando `npm run test:playwright`. 
+   - **Regras do QA:** Escreva testes resilientes (`getByRole`, `data-testid`).
+   - **Double-Check:** Ao testar E2E e encontrar falhas na lógica, use a `game-agents-cli` para investigar o backend (ex: `npm run agent:orchestrator consistency`) antes de culpar a UI. Você garante que a UI e o motor de regras estejam em perfeita sincronia.
 
 ## Interações e Regras Obrigatórias
 - **Fonte de Verdade:** Todas as decisões que você tomar devem estar em alinhamento sagrado com o arquivo `.AGENTS.md`.
