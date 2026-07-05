@@ -4,3 +4,11 @@
 /playwright/.cache
 /apps/api/node_modules
 /apps/web/node_modules
+/apps/api/dist
+/apps/web/dist
+/posts
+
+# Environment variables (except example templates)
+.env
+.env.local
+.env.development.local

@@ -29,15 +29,15 @@ export class RoomsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     console.log(`Client connected: ${client.id}`);
   }
 
-  handleDisconnect(client: Socket) {
+  async handleDisconnect(client: Socket) {
     console.log(`Client disconnected: ${client.id}`);
     const playerMapping = this.connectedPlayers.get(client.id);
     if (playerMapping) {
-      this.db.load();
+      await this.db.load();
       const player = this.db.players.find(p => p.id === playerMapping.playerId);
       if (player) {
         player.isOnline = false;
-        this.db.save();
+        await this.db.save();
         console.log(`Presence: Player ${player.name} is now OFFLINE`);
         this.broadcastTableUpdate(playerMapping.roomId, 'players', 'UPDATE', player);
       }
@@ -46,7 +46,7 @@ export class RoomsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('subscribe_room')
-  handleSubscribeRoom(
+  async handleSubscribeRoom(
     @ConnectedSocket() client: Socket,
     @MessageBody() data: { roomCode: string; playerId: string },
   ) {
@@ -56,11 +56,11 @@ export class RoomsGateway implements OnGatewayConnection, OnGatewayDisconnect {
       console.log(`Client ${client.id} (Player: ${playerId}) joined room code: ${roomCode}`);
       
       if (playerId && playerId !== 'client-guest') {
-        this.db.load();
+        await this.db.load();
         const player = this.db.players.find(p => p.id === playerId);
         if (player) {
           player.isOnline = true;
-          this.db.save();
+          await this.db.save();
           console.log(`Presence: Player ${player.name} is now ONLINE`);
           this.connectedPlayers.set(client.id, { roomId: roomCode, playerId });
           this.broadcastTableUpdate(roomCode, 'players', 'UPDATE', player);

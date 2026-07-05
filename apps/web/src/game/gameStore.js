@@ -828,3 +828,8 @@ window.addEventListener('supabase-bot-thinking', (e) => {
   gameStore.isBotThinking = e.detail.thinking;
   gameStore.botThinkingPlayerId = e.detail.thinking ? e.detail.playerId : null;
 });
+
+// Expose to window for E2E testing
+if (typeof window !== 'undefined') {
+  window.gameStore = gameStore;
+}

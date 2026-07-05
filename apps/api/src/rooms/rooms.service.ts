@@ -32,8 +32,8 @@ export class RoomsService {
   ) {}
 
   // 1. Create Room
-  createRoom(cityCode: string, hostName: string, hostColor: string, hostPin: string | null = null): Room {
-    this.db.load();
+  async createRoom(cityCode: string, hostName: string, hostColor: string, hostPin: string | null = null): Promise<Room> {
+    await this.db.load();
     const code = generateRoomCode();
     const roomId = 'room-' + Math.random().toString(36).substr(2, 9);
     
@@ -76,15 +76,15 @@ export class RoomsService {
 
     this.db.rooms.push(newRoom);
     this.db.players.push(host);
-    this.db.save();
+    await this.db.save();
 
     console.log(`Room created: ${code} (ID: ${roomId}) with host ${hostName}`);
     return newRoom;
   }
 
   // 2. Join Room
-  joinRoom(code: string, name: string, color: string, isBot = false, botPersonality: any = null, pin: string | null = null): Player {
-    this.db.load();
+  async joinRoom(code: string, name: string, color: string, isBot = false, botPersonality: any = null, pin: string | null = null): Promise<Player> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) {
       throw new NotFoundException(`Room with code ${code} not found`);
@@ -125,7 +125,7 @@ export class RoomsService {
     };
 
     this.db.players.push(newPlayer);
-    this.db.save();
+    await this.db.save();
 
     // Broadcast table update
     this.gateway.broadcastTableUpdate(room.id, 'players', 'INSERT', newPlayer);
@@ -135,8 +135,8 @@ export class RoomsService {
   }
 
   // Start the match (transitions from LOBBY to PLAYING)
-  startMatch(code: string): Room {
-    this.db.load();
+  async startMatch(code: string): Promise<Room> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
 
@@ -157,7 +157,7 @@ export class RoomsService {
       this.db.properties.push(prop);
     }
 
-    this.db.save();
+    await this.db.save();
     
     // Broadcast updates
     this.gateway.broadcastTableUpdate(room.id, 'rooms', 'UPDATE', room);
@@ -180,8 +180,8 @@ export class RoomsService {
   }
 
   // 3. Roll Dice
-  rollDice(code: string, playerId: string): any {
-    this.db.load();
+  async rollDice(code: string, playerId: string): Promise<any> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
     if (room.status !== 'PLAYING') throw new BadRequestException('Match not active');
@@ -209,7 +209,7 @@ export class RoomsService {
       passedStart = true;
     }
 
-    this.db.save();
+    await this.db.save();
 
     // Broadcast update
     this.gateway.broadcastRoomUpdate(room.id, 'player_moved', {
@@ -238,8 +238,8 @@ export class RoomsService {
   }
 
   // Resolve Landing Slot (Called after Phaser animation is completed on frontend)
-  resolveLanding(code: string, playerId: string, slotId: number): any {
-    this.db.load();
+  async resolveLanding(code: string, playerId: string, slotId: number): Promise<any> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
 
@@ -252,7 +252,7 @@ export class RoomsService {
     if (slotId === 0) { // START
       player.money += 200;
       this.addLog(room.id, `${player.name} parou exatamente no START e recebeu +200!`, '#10B981');
-      this.db.save();
+      await this.db.save();
       this.gateway.broadcastTableUpdate(room.id, 'players', 'UPDATE', player);
       return { type: 'START' };
     }
@@ -263,8 +263,8 @@ export class RoomsService {
       const taxAmount = slotId === 4 ? 150 : 200;
       player.money -= taxAmount;
       this.addLog(room.id, `${player.name} foi taxado em ${taxAmount}M.`, '#EF4444');
-      this.checkBankruptcy(room.id, player);
-      this.db.save();
+      await this.checkBankruptcy(room.id, player);
+      await this.db.save();
       this.gateway.broadcastTableUpdate(room.id, 'players', 'UPDATE', player);
       return { type: 'TAX', cost: taxAmount };
     }
@@ -277,8 +277,8 @@ export class RoomsService {
         player.money -= Math.abs(card.amount);
       }
       this.addLog(room.id, `Sorte ou Revés: ${card.text}`, card.amount > 0 ? '#10B981' : '#EF4444');
-      this.checkBankruptcy(room.id, player);
-      this.db.save();
+      await this.checkBankruptcy(room.id, player);
+      await this.db.save();
       this.gateway.broadcastTableUpdate(room.id, 'players', 'UPDATE', player);
       return { type: 'EVENT', card };
     }
@@ -308,10 +308,10 @@ export class RoomsService {
             player.money -= rentDue;
             owner.money += partial;
             this.addLog(room.id, `${player.name} pagou apenas ${partial}M (tudo o que tinha) de aluguel para ${owner.name}.`, '#EF4444');
-            this.checkBankruptcy(room.id, player);
+            await this.checkBankruptcy(room.id, player);
           }
 
-          this.db.save();
+          await this.db.save();
           this.gateway.broadcastTableUpdate(room.id, 'players', 'UPDATE', player);
           this.gateway.broadcastTableUpdate(room.id, 'players', 'UPDATE', owner);
           return { type: 'PROPERTY', status: 'RENT_PAID', amount: rentDue, owner: owner.name };
@@ -323,8 +323,8 @@ export class RoomsService {
   }
 
   // 4. Buy Property
-  buyProperty(code: string, playerId: string, slotId: number): Property {
-    this.db.load();
+  async buyProperty(code: string, playerId: string, slotId: number): Promise<Property> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
 
@@ -345,7 +345,7 @@ export class RoomsService {
     // Apply appreciation for dynamic economy rules (adjacent properties owned by same player)
     this.recalculatePropertyValuations(room.id);
 
-    this.db.save();
+    await this.db.save();
 
     // Broadcast table updates
     this.gateway.broadcastTableUpdate(room.id, 'players', 'UPDATE', player);
@@ -359,7 +359,7 @@ export class RoomsService {
 
   // 5. End Turn
   async endTurn(code: string, playerId: string): Promise<Room> {
-    this.db.load();
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
 
@@ -370,7 +370,7 @@ export class RoomsService {
       // Game Over
       room.status = 'FINISHED';
       room.winnerId = alivePlayers[0]?.id || null;
-      this.db.save();
+      await this.db.save();
       this.gateway.broadcastTableUpdate(room.id, 'rooms', 'UPDATE', room);
       this.addLog(room.id, `🏆 Fim de jogo! ${alivePlayers[0]?.name || 'Ninguém'} venceu a partida!`, '#10B981');
       return room;
@@ -404,7 +404,7 @@ export class RoomsService {
 
     // Set the target player as active by logging the event
     const nextPlayer = alivePlayers[nextIndex];
-    this.db.save();
+    await this.db.save();
 
     this.gateway.broadcastRoomUpdate(room.id, 'turn_changed', {
       activePlayerId: nextPlayer.id,
@@ -422,8 +422,8 @@ export class RoomsService {
   }
 
   // Take a loan from bank (Dynamic Economy)
-  takeLoan(code: string, playerId: string, amount: number): any {
-    this.db.load();
+  async takeLoan(code: string, playerId: string, amount: number): Promise<any> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
 
@@ -440,7 +440,7 @@ export class RoomsService {
     room.bankingLiquidity -= amount;
 
     this.addLog(room.id, `${player.name} pegou empréstimo de ${amount}M com juros de ${interest}M.`, '#F59E0B');
-    this.db.save();
+    await this.db.save();
 
     this.gateway.broadcastTableUpdate(room.id, 'players', 'UPDATE', player);
     this.gateway.broadcastTableUpdate(room.id, 'rooms', 'UPDATE', room);
@@ -528,7 +528,7 @@ export class RoomsService {
   }
 
   // Verify bankruptcy
-  private checkBankruptcy(roomId: string, player: Player) {
+  private async checkBankruptcy(roomId: string, player: Player) {
     if (player.money < 0) {
       // release properties
       player.isBankrupt = true;
@@ -538,7 +538,7 @@ export class RoomsService {
         p.multiplier = 1.0;
         this.gateway.broadcastTableUpdate(roomId, 'properties', 'UPDATE', p);
       });
-      this.addLog(roomId, `🚨 ${player.name} DECRETOU FALÊNCIA! Suas propriedades voltaram ao mercado.`, '#EF4444');
+      await this.addLog(roomId, `🚨 ${player.name} DECRETOU FALÊNCIA! Suas propriedades voltaram ao mercado.`, '#EF4444');
       this.triggerNewsNarrator(roomId, `Colapso financeiro: O jogador ${player.name} faliu! Suas propriedades voltaram ao mercado.`);
     }
   }
@@ -564,7 +564,7 @@ export class RoomsService {
   }
 
   // Add Log Entry
-  addLog(roomId: string, message: string, color: string | null = null): Log {
+  async addLog(roomId: string, message: string, color: string | null = null): Promise<Log> {
     const newLog: Log = {
       id: 'log-' + Math.random().toString(36).substr(2, 9),
       roomId,
@@ -573,7 +573,7 @@ export class RoomsService {
       createdAt: new Date().toISOString(),
     };
     this.db.logs.unshift(newLog);
-    this.db.save();
+    await this.db.save();
 
     this.gateway.broadcastTableUpdate(roomId, 'logs', 'INSERT', newLog);
     return newLog;
@@ -581,8 +581,8 @@ export class RoomsService {
 
   // --- AUCTIONS (MVP 3) ---
 
-  startAuction(code: string, slotId: number): Auction {
-    this.db.load();
+  async startAuction(code: string, slotId: number): Promise<Auction> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
 
@@ -602,7 +602,7 @@ export class RoomsService {
     };
 
     this.db.auctions.push(newAuction);
-    this.db.save();
+    await this.db.save();
 
     this.gateway.broadcastTableUpdate(room.id, 'auctions', 'INSERT', newAuction);
     this.addLog(room.id, `Leilão iniciado para a propriedade no Slot ${slotId}! Lance inicial: ${newAuction.highestBid}M.`, '#3B82F6');
@@ -612,8 +612,8 @@ export class RoomsService {
     return newAuction;
   }
 
-  placeBid(code: string, auctionId: string, playerId: string, bidAmount: number): Auction {
-    this.db.load();
+  async placeBid(code: string, auctionId: string, playerId: string, bidAmount: number): Promise<Auction> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
 
@@ -643,7 +643,7 @@ export class RoomsService {
       this.addLog(room.id, `Novo lance de ${bidAmount}M por ${player.name}.`, player.color);
     }
 
-    this.db.save();
+    await this.db.save();
     this.gateway.broadcastTableUpdate(room.id, 'auctions', 'UPDATE', auction);
 
     this.scheduleAuctionEndCheck(room.id, auctionId);
@@ -652,8 +652,8 @@ export class RoomsService {
   }
 
   private scheduleAuctionEndCheck(roomId: string, auctionId: string) {
-    const check = () => {
-      this.db.load();
+    const check = async () => {
+      await this.db.load();
       const auction = this.db.auctions.find(a => a.id === auctionId);
       if (!auction || auction.status !== 'ACTIVE') return;
 
@@ -675,8 +675,8 @@ export class RoomsService {
     }
   }
 
-  private resolveAuction(roomId: string, auctionId: string) {
-    this.db.load();
+  private async resolveAuction(roomId: string, auctionId: string) {
+    await this.db.load();
     const auction = this.db.auctions.find(a => a.id === auctionId && a.status === 'ACTIVE');
     if (!auction) return;
 
@@ -690,32 +690,32 @@ export class RoomsService {
         winner.money -= auction.highestBid;
         prop.ownerId = winner.id;
         this.recalculatePropertyValuations(roomId);
-        this.addLog(roomId, `Leilão encerrado! ${winner.name} arrematou a propriedade no Slot ${auction.slotId} por ${auction.highestBid}M!`, winner.color);
+        await this.addLog(roomId, `Leilão encerrado! ${winner.name} arrematou a propriedade no Slot ${auction.slotId} por ${auction.highestBid}M!`, winner.color);
         this.gateway.broadcastTableUpdate(roomId, 'players', 'UPDATE', winner);
         this.gateway.broadcastTableUpdate(roomId, 'properties', 'UPDATE', prop);
         this.triggerNewsNarrator(roomId, `Vendido! ${winner.name} venceu o leilão e arrematou o Slot ${auction.slotId} por ${auction.highestBid}M!`);
       } else {
-        this.addLog(roomId, `Leilão encerrado sem ofertas válidas.`);
+        await this.addLog(roomId, `Leilão encerrado sem ofertas válidas.`);
       }
     } else {
-      this.addLog(roomId, `Leilão encerrado. Sem lances.`);
+      await this.addLog(roomId, `Leilão encerrado. Sem lances.`);
     }
 
-    this.db.save();
+    await this.db.save();
     this.gateway.broadcastTableUpdate(roomId, 'auctions', 'UPDATE', auction);
   }
 
   // --- BILATERAL TRADING (P2P) ---
 
-  proposeTrade(
+  async proposeTrade(
     code: string,
     senderId: string,
     receiverId: string,
     offerCash: number,
     offerProperties: number[],
     requestProperties: number[],
-  ): Trade {
-    this.db.load();
+  ): Promise<Trade> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
 
@@ -760,7 +760,7 @@ export class RoomsService {
     };
 
     this.db.trades.push(newTrade);
-    this.db.save();
+    await this.db.save();
 
     this.gateway.broadcastTableUpdate(room.id, 'trades', 'INSERT', newTrade);
     this.addLog(room.id, `${sender.name} propôs uma negociação comercial para ${receiver.name}!`, '#EC4899');
@@ -768,8 +768,8 @@ export class RoomsService {
     return newTrade;
   }
 
-  resolveTrade(code: string, tradeId: string, resolution: 'ACCEPTED' | 'DECLINED'): Trade {
-    this.db.load();
+  async resolveTrade(code: string, tradeId: string, resolution: 'ACCEPTED' | 'DECLINED'): Promise<Trade> {
+    await this.db.load();
     const room = this.db.rooms.find(r => r.code === code);
     if (!room) throw new NotFoundException('Room not found');
 
@@ -781,7 +781,7 @@ export class RoomsService {
       const sender = this.db.players.find(p => p.id === trade.senderId);
       const receiver = this.db.players.find(p => p.id === trade.receiverId);
       this.addLog(room.id, `${receiver?.name || 'O destinatário'} recusou a oferta de troca de ${sender?.name || 'do remetente'}.`, '#EF4444');
-      this.db.save();
+      await this.db.save();
       this.gateway.broadcastTableUpdate(room.id, 'trades', 'UPDATE', trade);
       return trade;
     }
@@ -792,14 +792,14 @@ export class RoomsService {
 
     if (!sender || !receiver || sender.isBankrupt || receiver.isBankrupt) {
       trade.status = 'EXPIRED';
-      this.db.save();
+      await this.db.save();
       this.gateway.broadcastTableUpdate(room.id, 'trades', 'UPDATE', trade);
       throw new BadRequestException('One of the trading parties is no longer active');
     }
 
     if (sender.money < trade.offerCash) {
       trade.status = 'EXPIRED';
-      this.db.save();
+      await this.db.save();
       this.gateway.broadcastTableUpdate(room.id, 'trades', 'UPDATE', trade);
       throw new BadRequestException('Sender no longer has the offered cash');
     }
@@ -811,7 +811,7 @@ export class RoomsService {
       const p = props.find(x => x.slotId === slotId);
       if (!p || p.ownerId !== trade.senderId) {
         trade.status = 'EXPIRED';
-        this.db.save();
+        await this.db.save();
         this.gateway.broadcastTableUpdate(room.id, 'trades', 'UPDATE', trade);
         throw new BadRequestException(`Transaction failed: Property ${slotId} ownership changed`);
       }
@@ -822,7 +822,7 @@ export class RoomsService {
       const p = props.find(x => x.slotId === slotId);
       if (!p || p.ownerId !== trade.receiverId) {
         trade.status = 'EXPIRED';
-        this.db.save();
+        await this.db.save();
         this.gateway.broadcastTableUpdate(room.id, 'trades', 'UPDATE', trade);
         throw new BadRequestException(`Transaction failed: Requested property ${slotId} ownership changed`);
       }
@@ -848,7 +848,7 @@ export class RoomsService {
     // Recalculate dynamic valuations
     this.recalculatePropertyValuations(room.id);
 
-    this.db.save();
+    await this.db.save();
 
     // Broadcast all updates
     this.gateway.broadcastTableUpdate(room.id, 'players', 'UPDATE', sender);
@@ -876,9 +876,9 @@ export class RoomsService {
       createdAt: new Date().toISOString(),
     };
     
-    this.db.load();
+    await this.db.load();
     this.db.aiNews.unshift(newEntry);
-    this.db.save();
+    await this.db.save();
     
     this.gateway.broadcastTableUpdate(roomId, 'ai_news', 'INSERT', newEntry);
   }
@@ -888,7 +888,7 @@ export class RoomsService {
     
     // 2-second delay to simulate bot thinking ("Pensando...")
     setTimeout(async () => {
-      this.db.load();
+      await this.db.load();
       const room = this.db.rooms.find(r => r.id === roomId);
       if (!room || room.status !== 'PLAYING') return;
 
@@ -899,7 +899,7 @@ export class RoomsService {
       this.gateway.broadcastRoomUpdate(roomId, 'bot_thinking', { playerId, thinking: true });
 
       // Step 1: Roll Dice
-      const rollDetails = this.rollDice(room.code, playerId);
+      const rollDetails = await this.rollDice(room.code, playerId);
       
       // Broadcast bot finished thinking
       this.gateway.broadcastRoomUpdate(roomId, 'bot_thinking', { playerId, thinking: false });
@@ -909,7 +909,7 @@ export class RoomsService {
       
       setTimeout(async () => {
         // Step 2: Resolve Landing
-        const resolution = this.resolveLanding(room.code, playerId, rollDetails.to);
+        const resolution = await this.resolveLanding(room.code, playerId, rollDetails.to);
 
         // Step 3: Action Decision
         if (resolution.type === 'PROPERTY' && resolution.status === 'UNOWNED') {
@@ -927,7 +927,7 @@ export class RoomsService {
             'BUY',
           );
 
-          this.addLog(roomId, `Bot ${player.name} decidiu: ${decision.rationale}`, '#F59E0B');
+          await this.addLog(roomId, `Bot ${player.name} decidiu: ${decision.rationale}`, '#F59E0B');
 
           if (decision.action === 'BUY' && player.money >= landedSlot.cost) {
             this.buyProperty(room.code, playerId, landedSlot.id);

@@ -6,8 +6,8 @@ export class DatabaseController {
   constructor(private readonly dbService: DatabaseService) {}
 
   @Get(':table')
-  getTable(@Param('table') table: string, @Query() query: any) {
-    this.dbService.load();
+  async getTable(@Param('table') table: string, @Query() query: any) {
+    await this.dbService.load();
     let list: any[] = [];
     
     if (table === 'rooms') list = this.dbService.rooms;
