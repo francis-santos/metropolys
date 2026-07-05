@@ -122,25 +122,35 @@ Realtime:
 Supabase Realtime
 
 Estrutura recomendada
-apps/web
-├── Vue
-├── Vuetify
-├── Phaser
-│
-├── screens
-│   ├── Home
-│   ├── CitySelection
-│   ├── Match
-│   └── Settings
-│
-├── game
-│   ├── board
-│   ├── economy
-│   ├── players
-│   ├── events
-│   └── citypacks
-│
-└── services
-    ├── supabase
-    ├── ai
-    └── multiplayer
+
+```mermaid
+graph LR
+    App["apps/web"] --> Stack["Stack Base"]
+    Stack --> Vue
+    Stack --> Vuetify
+    Stack --> Phaser
+
+    App --> Screens["screens/"]
+    Screens --> Home
+    Screens --> CitySelection
+    Screens --> Match
+    Screens --> Settings
+
+    App --> Game["game/"]
+    Game --> Board["board/"]
+    Game --> Economy["economy/"]
+    Game --> Players["players/"]
+    Game --> Events["events/"]
+    Game --> Citypacks["citypacks/"]
+
+    App --> Services["services/"]
+    Services --> Supabase["supabase/"]
+    Services --> AI["ai/"]
+    Services --> Multiplayer["multiplayer/"]
+
+    style App fill:#2b2b2b,stroke:#fff,stroke-width:2px,color:#fff
+    style Stack fill:#41b883,stroke:#35495e,color:#fff
+    style Screens fill:#60a5fa,stroke:#2563eb,color:#fff
+    style Game fill:#f43f5e,stroke:#e11d48,color:#fff
+    style Services fill:#f59e0b,stroke:#d97706,color:#fff
+```
