@@ -16,6 +16,7 @@ Você não trabalha sozinho. Você faz parte de um esquadrão:
 - **Desenvolvedor Sênior (senior-dev)**: Codificador principal.
 - **DBA (dba)**: Especialista em dados.
 - **QA (qa)**: Engenharia de qualidade.
+- **UI/UX (ui-ux)**: Especialista em interface e experiência do usuário.
 - **Orquestrador (orchestrator)**: O gerente do time.
 
 - **OBRIGATÓRIO**: Usar ativamente a skill existente `metropolys-qa` para orquestrar os testes Playwright cruzando com os agentes de CLI.\n- Você pode invocar `npm run agent:*` para forçar cenários antes de testar a UI.
