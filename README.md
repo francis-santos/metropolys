@@ -116,7 +116,7 @@ metropolys/
 ### Backend (`apps/api`)
 *   **NestJS**: Framework Node.js progressivo para APIs escaláveis e robustas.
 *   **Socket.io (WebSockets)**: Sincronização em tempo real de turnos, posições e eventos.
-*   **Supabase (PostgreSQL)**: Banco de dados relacional para persistência resiliente do estado das salas, jogadores e transações.
+*   **Banco de Dados**: Flexibilidade de persistência. Suporta conexão direta com **Supabase (Nuvem)**, **PostgreSQL local** (Docker/Instalação nativa) ou **In-Memory Fallback** (em memória, caso nenhuma variável `DATABASE_URL` seja declarada).
 
 ---
 
@@ -125,7 +125,7 @@ metropolys/
 ### Pré-requisitos
 *   **Node.js** (versão v18 ou superior)
 *   **npm** (instalado junto com o Node.js)
-*   **Instância do PostgreSQL/Supabase** configurada
+*   **Instância do PostgreSQL / Supabase** configurada (Opcional; caso ausente, o sistema entra em modo *fallback em memória*)
 
 ### Passo 1: Instalar dependências globais
 No diretório raiz do projeto, instale todas as dependências do monorepo:
@@ -134,8 +134,8 @@ npm install
 ```
 
 ### Passo 2: Configurar as Variáveis de Ambiente
-Crie os arquivos de ambiente com base nos exemplos fornecidos:
-1. Em `apps/api/`, crie o seu arquivo `.env.local` a partir de `.env.example` e preencha as credenciais da URL do banco PostgreSQL.
+Caso opte por usar persistência em banco relacional (Supabase Nuvem ou PostgreSQL local), crie os arquivos de ambiente com base nos exemplos fornecidos:
+1. Em `apps/api/`, crie o seu arquivo `.env.local` a partir de `.env.example` e preencha a credencial da URL de conexão direta do banco PostgreSQL (`DATABASE_URL`).
 2. Em `apps/web/`, crie o seu arquivo `.env` a partir de `.env.example` com os detalhes da chave anônima do Supabase.
 
 ### Passo 3: Executar em Modo de Desenvolvimento
