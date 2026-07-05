@@ -77,29 +77,30 @@ O projeto é estruturado como um **Monorepo** gerenciado com **NPM Workspaces**:
 
 ```
 metropolys/
+├── .agent/                 # Configurações, diretrizes de IA e templates de relatórios
 ├── apps/
-│   ├── web/               # Aplicação Frontend (Vue 3, Vuetify, Phaser)
+│   ├── web/                # Aplicação Frontend (Vue 3, Vuetify, Phaser)
 │   │   ├── src/
-│   │   │   ├── components/  # Componentes de interface do dashboard
-│   │   │   ├── game/        # Lógica Phaser, mapas de tabuleiro e store
-│   │   │   │   ├── board-data.js
-│   │   │   │   ├── boardScene.js  # Cena e animações Phaser
-│   │   │   │   └── gameStore.js   # Estado do jogo do cliente
-│   │   │   └── services/    # Conexão mock do Supabase/Socket.io
+│   │   │   ├── components/ # Componentes de interface do dashboard
+│   │   │   ├── game/       # Lógica Phaser, mapas de tabuleiro e store (gameStore.js)
+│   │   │   └── services/   # Integração com Supabase e WebSockets
 │   │   └── package.json
 │   │
-│   └── api/               # Aplicação Backend (NestJS)
+│   └── api/                # Aplicação Backend (NestJS)
 │       ├── src/
-│       │   ├── ai/          # Serviços de Inteligência Artificial do jogo
-│       │   ├── database/    # Persistência de dados local (Mock Supabase)
-│       │   ├── rooms/       # Gerenciamento de salas, WebSocket Gateway e loop principal
+│       │   ├── ai/         # Serviços de Inteligência Artificial
+│       │   ├── database/   # Conexão com o Banco de Dados PostgreSQL (Supabase)
+│       │   ├── rooms/      # Gerenciamento de salas, WebSocket Gateway e regras de negócio
 │       │   └── main.ts
-│       ├── database.json    # Banco de dados em formato JSON local
+│       ├── supabase/       # Scripts utilitários de DB e migrations SQL do PostgreSQL
 │       └── package.json
 │
-├── openspec/              # Especificações e requisitos do jogo (OpenSpec)
-├── package.json           # Configurações globais e Scripts do Monorepo
-└── RESUMO_CONCEITUAL.md   # Resumo conceitual do ecossistema do jogo
+├── openspec/               # Especificações e requisitos de design (OpenSpec)
+├── tests/                  # Suíte de testes integrados e E2E do Monorepo
+│   ├── api/                # Testes rápidos de integração de API e persistência
+│   └── e2e/                # Testes visuais ponta a ponta com Playwright
+├── package.json            # Configurações globais e Scripts do Monorepo
+└── RESUMO_CONCEITUAL.md    # Resumo conceitual do ecossistema do jogo
 ```
 
 ---
@@ -115,7 +116,7 @@ metropolys/
 ### Backend (`apps/api`)
 *   **NestJS**: Framework Node.js progressivo para APIs escaláveis e robustas.
 *   **Socket.io (WebSockets)**: Sincronização em tempo real de turnos, posições e eventos.
-*   **Banco de Dados Local**: Serviço de persistência local que simula a interface do Supabase via chamadas HTTP REST e WebSocket events, facilitando o desenvolvimento sem dependências externas complexas.
+*   **Supabase (PostgreSQL)**: Banco de dados relacional para persistência resiliente do estado das salas, jogadores e transações.
 
 ---
 
@@ -124,16 +125,22 @@ metropolys/
 ### Pré-requisitos
 *   **Node.js** (versão v18 ou superior)
 *   **npm** (instalado junto com o Node.js)
+*   **Instância do PostgreSQL/Supabase** configurada
 
 ### Passo 1: Instalar dependências globais
-No diretório raiz do projeto, instale todas as dependências de ambos os workspaces:
+No diretório raiz do projeto, instale todas as dependências do monorepo:
 ```bash
 npm install
 ```
 
-### Passo 2: Executar em Modo de Desenvolvimento
+### Passo 2: Configurar as Variáveis de Ambiente
+Crie os arquivos de ambiente com base nos exemplos fornecidos:
+1. Em `apps/api/`, crie o seu arquivo `.env.local` a partir de `.env.example` e preencha as credenciais da URL do banco PostgreSQL.
+2. Em `apps/web/`, crie o seu arquivo `.env` a partir de `.env.example` com os detalhes da chave anônima do Supabase.
 
-Para rodar o projeto, você deve iniciar o backend e o frontend simultaneamente. No diretório raiz, abra duas abas do terminal e execute:
+### Passo 3: Executar em Modo de Desenvolvimento
+
+Para rodar o projeto, você deve iniciar o backend e o frontend simultaneamente. No diretório raiz, execute os scripts correspondentes:
 
 **Iniciar o Servidor Backend (NestJS - porta `3008`):**
 ```bash
@@ -145,7 +152,7 @@ npm run dev:api
 npm run dev:web
 ```
 
-Abra o navegador no endereço indicado pelo Vite (normalmente [http://localhost:5173](http://localhost:5173)) para acessar o jogo.
+Abra o navegador no endereço [http://localhost:5173](http://localhost:5173) para acessar o jogo.
 
 ---
 
@@ -163,16 +170,22 @@ Para mais detalhes sobre as interações e funcionamento, consulte a documentaç
 
 ## 🧪 Testes e Simulações
 
-O backend possui scripts de simulação de ponta a ponta (E2E) para validar a estabilidade das salas e os fluxos de turnos sob condições automatizadas.
+O monorepo conta com uma estratégia dividida em testes de integração (API) e testes funcionais visuais (E2E):
 
-Para rodar a simulação E2E automatizada:
+### Rodar os Testes E2E (Playwright)
+Com os servidores rodando ou usando o trigger automático do Playwright:
 ```bash
-npm run test:e2e
+# Rodar testes em modo Headless
+npm run test:playwright
+
+# Abrir a interface interativa do Playwright
+npm run test:playwright:ui
 ```
 
-Para compilar ambas as aplicações para produção:
+### Rodar Testes de Integração Rápidos
+Você pode rodar testes de regras de backend isoladamente (ex: empréstimos) sem carregar o navegador:
 ```bash
-npm run build
+node tests/api/loan.integration.js
 ```
 
 ---
