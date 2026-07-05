@@ -29,6 +29,34 @@ Diferente dos jogos de tabuleiro imobiliários tradicionais, o Metropolys utiliz
 
 ---
 
+## 🖼️ Preview do Projeto
+
+Abaixo estão algumas imagens ilustrando a interface e o visual planejado para o jogo:
+
+### Telas de Menu
+<p align="center">
+  <img src="img/home_screen.png" width="48%" alt="Tela Inicial">
+  <img src="img/settings_screen.png" width="48%" alt="Configurações">
+</p>
+
+### Seleção de Cidades
+<p align="center">
+  <img src="img/city_selection_screen.png" width="80%" alt="Seleção de Cidade">
+</p>
+
+### Visão do Tabuleiro
+<p align="center">
+  <img src="img/initial_board_screen.png" width="80%" alt="Visão Inicial do Tabuleiro">
+</p>
+
+### Mecânicas de Jogo (Compras e Empréstimos)
+<p align="center">
+  <img src="img/purchase_board_screen.png" width="48%" alt="Painel de Compra">
+  <img src="img/loan_board_screen.png" width="48%" alt="Painel de Empréstimo">
+</p>
+
+---
+
 ## 🎲 Mecânicas do Jogo (MVP)
 
 A lógica central do jogo é orientada a turnos e gerida por um motor de regras robusto no backend:
