@@ -12,6 +12,8 @@
     "build:api": "npm run build --workspace=apps/api",
     "build": "npm run build:web && npm run build:api",
     "test:e2e": "node apps/api/test/e2e-simulation.js",
+    "test:playwright": "npx playwright test",
+    "test:playwright:ui": "npx playwright test --ui",
     "agent:infra": "node .agent/skills/board-agents/scripts/agents/01-infra-agent.js",
     "agent:data-persistence": "node .agent/skills/board-agents/scripts/agents/02-data-persistence-agent.js",
     "agent:game-engine": "node .agent/skills/board-agents/scripts/agents/03-game-engine-agent.js",
@@ -41,5 +43,9 @@
     "@nestjs/platform-express": "^11.1.26",
     "@nestjs/platform-socket.io": "^11.1.26",
     "@nestjs/websockets": "^11.1.26"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "concurrently": "^9.1.2"
   }
 }
