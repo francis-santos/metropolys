@@ -42,6 +42,7 @@
 
       <!-- Option 2: Create Online Match -->
       <v-btn
+        v-if="false"
         block
         size="x-large"
         variant="outlined"
@@ -53,7 +54,7 @@
       </v-btn>
 
       <!-- Option 3: Join Room by Code -->
-      <v-card class="pa-4 rounded-xl join-sub-card text-center">
+      <v-card v-if="false" class="pa-4 rounded-xl join-sub-card text-center">
         <span class="text-caption text-uppercase text-white mb-3 d-block font-mono tracking-widest">
           >> Conectar em Sala Existente
         </span>
